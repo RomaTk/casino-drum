@@ -17,7 +17,7 @@ let getArrayOfImagesSrc=function(){
 let getSpeedForEachColumn=function(){//how many pixeles do at the beginning
 	let returnArray=[];
 	for(let i=0; i<numberOfColumns; i+=1){
-		returnArray.push(-numberOfColumns+i);
+		returnArray.push(-10);
 	}
 	return returnArray
 }
@@ -47,8 +47,8 @@ let getScrollTimes=function(){// how many pictures to scroll
 	return returnArray
 }
 
-let maxTimes=30;
-let minTimes=10;
+let maxTimes=2;
+let minTimes=1;
 let numberOfColumns=8;
 let imageSrcArray=getArrayOfImagesSrc();
 let game=createGame({

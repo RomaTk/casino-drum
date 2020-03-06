@@ -36,7 +36,7 @@ let scroll=function(delta){
 			game.scrollTimes.madeInPixeles[columnIndex]+=game.columnsSpeed[columnIndex];
 		}else if(game.columsStages[columnIndex]=='running'){
 			game.columnsSpeed[columnIndex]=-game.columnsSpeed[columnIndex];
-			game.scrollTimes.inPixeles[columnIndex]=-game.columnsGoUp[columnIndex];
+			game.scrollTimes.inPixeles[columnIndex]=game.scrollTimes.madeInPixeles[columnIndex]-game.scrollTimes.inPixeles[columnIndex];
 			game.columnsGoUp[columnIndex]=0;
 			game.scrollTimes.madeInPixeles[columnIndex]=0;
 			game.columsStages[columnIndex]='returning';
