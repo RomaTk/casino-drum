@@ -24,7 +24,7 @@ let getSpeedForEachColumn=function(){//how many pixeles do at the beginning
 let getGoUpForEachColumn=function(){//how many pixeles return after necessary position
 	let returnArray=[];
 	for(let i=0; i<numberOfColumns; i+=1){
-		returnArray.push(-40);
+		returnArray.push(-10);
 	}
 	return returnArray
 }
