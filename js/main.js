@@ -72,6 +72,6 @@ let game=createGame({
 document.body.appendChild(game.nodeElement);
 
 let button=document.createElement("button");
-button.innerText="Scroll";
+button.innerText="Spin";
 document.body.appendChild(button);
 button.addEventListener('click',function(){game.run()});
