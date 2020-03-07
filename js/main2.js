@@ -47,8 +47,8 @@ let getScrollTimes=function(){// how many pictures to scroll
 	return returnArray
 }
 
-let maxTimes=2;
-let minTimes=1;
+let maxTimes=20;
+let minTimes=8;
 let numberOfColumns=8;
 let imageSrcArray=getArrayOfImagesSrc();
 let game=createGame({

@@ -1,5 +1,12 @@
 let scroll=function(delta){
 	let scrollColumn=function(columnIndex,column,game){
+		let functionToEnd=function(){
+			for (let i=0; i<column.length; i+=1){
+				let sprite=column[i];
+				sprite.y=game.sprites.firstYPosition+game.sprites.aboutSprite.height*i;
+			}
+			game.columsStages[columnIndex]='finished';
+		}
 		if ((Math.abs(game.scrollTimes.madeInPixeles[columnIndex])<Math.abs(game.scrollTimes.inPixeles[columnIndex]+game.columnsGoUp[columnIndex]))&&(game.columsStages[columnIndex]!='finished')){
 			let lastSprite=column[column.length-1];
 			if (lastSprite.y>=game.sprites.lastYPosition){
@@ -32,20 +39,24 @@ let scroll=function(delta){
 			}
 
 			game.columnsSpeed[columnIndex]=game.speedChangeFunction(columnIndex,game.columnsSpeed[columnIndex],game.columsStages[columnIndex]);
-
 			game.scrollTimes.madeInPixeles[columnIndex]+=game.columnsSpeed[columnIndex];
+
+			if ((game.columnsGoUp[columnIndex]==0)&&(Math.abs(game.scrollTimes.madeInPixeles[columnIndex])<Math.abs(game.scrollTimes.inPixeles[columnIndex]))){
+				functionToEnd();
+			}
+
 		}else if(game.columsStages[columnIndex]=='running'){
 			game.columnsSpeed[columnIndex]=-game.columnsSpeed[columnIndex];
-			game.scrollTimes.inPixeles[columnIndex]=game.scrollTimes.madeInPixeles[columnIndex]-game.scrollTimes.inPixeles[columnIndex];
+			if (game.columnsSpeed[columnIndex]<0){
+				game.scrollTimes.inPixeles[columnIndex]=game.scrollTimes.inPixeles[columnIndex]-game.scrollTimes.madeInPixeles[columnIndex];
+			}else{
+				game.scrollTimes.inPixeles[columnIndex]=game.scrollTimes.madeInPixeles[columnIndex]-game.scrollTimes.inPixeles[columnIndex];
+			}
 			game.columnsGoUp[columnIndex]=0;
 			game.scrollTimes.madeInPixeles[columnIndex]=0;
 			game.columsStages[columnIndex]='returning';
 		}else if(game.columsStages[columnIndex]!='finished'){
-			for (let i=0; i<column.length; i+=1){
-				let sprite=column[i];
-				sprite.y=game.sprites.firstYPosition+game.sprites.aboutSprite.height*i;
-			}
-			game.columsStages[columnIndex]='finished';
+			functionToEnd();
 		}
 	}
 	let sprites=this.sprites.array;
